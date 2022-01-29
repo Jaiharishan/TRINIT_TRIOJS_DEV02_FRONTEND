@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import userState from "../atoms/userAtom";
 import axios_api from "../axios/api";
 import { PlusIcon } from "@heroicons/react/solid";
 import { AddOrgModal, Navbar, OrgCard } from "../components";
 import Link from "next/link";
+import axios_ from "../axios/axios";
 
 export default function Home() {
   const [user, setUser]: [any, Function] = useRecoilState(userState);
   const array = [1, 1, 1, 1, 1];
+  const [ownOrgs, setOwnOrgs] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -18,10 +20,21 @@ export default function Home() {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const userId = await user._id;
+      if (userId) {
+        const result = await axios_.get(`user/orgList/${userId}`);
+        setOwnOrgs(result.data.message.ownOrg);
+      }
+    })();
+  }, []);
+
+  console.log(ownOrgs);
   return (
     <>
       <Navbar />
-      <div className="w-full h bg-gray-900 mt-20 py-16">
+      <div className="w-full h bg-gray-900 mt-20 py-16 min-h-screen">
         <div className="px-4 flex items-center md:items-start flex-col">
           <p className="text-white text-3xl">Create Orgainization</p>
           <AddOrgModal />
@@ -31,11 +44,11 @@ export default function Home() {
           <p className="text-white text-3xl">Owned organizations</p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            {array.map((elem) => {
+            {ownOrgs.map((ownOrg) => {
               return (
                 <Link href="/Org">
                   <a>
-                    <OrgCard />
+                    <OrgCard org={ownOrg} />
                   </a>
                 </Link>
               );

@@ -38,12 +38,7 @@ const profile = () => {
           <p className="text-3xl px-2">{user?.userName}</p>
         </div>
 
-        <div className="text-white text-lg mb-10 px-2">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa sint
-          inventore est sed fugiat delectus nisi soluta suscipit labore
-          accusantium, quia tempora voluptate voluptatum quae dolorum error
-          velit deleniti expedita.
-        </div>
+        <div className="text-white text-lg mb-10 px-2"></div>
 
         <div className="px-2">
           <EditUserModal />
@@ -53,6 +48,9 @@ const profile = () => {
 
         <div className="flex gap-4 flex-wrap justify-center md:justify-start">
           {orgs?.employeeAt?.map((elem: any) => {
+            return <OrgCard org={elem.orgId} />;
+          })}
+          {orgs?.ownOrg?.map((elem: any) => {
             return <OrgCard org={elem.orgId} />;
           })}
         </div>

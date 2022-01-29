@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { PencilIcon, PlusIcon } from "@heroicons/react/solid";
+import axios_api from "../axios/api";
 export default function AssignUserModal() {
   const [showModal, setShowModal] = useState(false);
 
   const [description, setDescription] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("submit working");
+    const result = await axios_api.put("/user/edit", {
+      description,
+    });
+    console.log(result);
 
     // using axios i will send the data
     setShowModal(false);
@@ -29,7 +34,7 @@ export default function AssignUserModal() {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Assign Member</h3>
+                  <h3 className="text-3xl font-semibold">Edit profile</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}

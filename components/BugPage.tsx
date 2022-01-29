@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { AssignUserModal, DiscussionCard } from ".";
 import Link from "next/link";
 import axios_api from "../axios/api";
+import { ArrowRightIcon } from "@heroicons/react/solid";
 
 const BugPage = ({ bug }: any) => {
   const array = [1, 1, 1, 1, 1];
@@ -49,10 +50,20 @@ const BugPage = ({ bug }: any) => {
 
       <div className="text-3xl text-white mb-10">Discussions</div>
 
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 mb-10">
         {array.map((elem) => (
           <DiscussionCard />
         ))}
+      </div>
+
+      <div className="flex items-center px-4 fixed bottom-0 left-0 w-full py-5 gap-2">
+        <input
+          className="border-2 border-gray-600 rounded-lg px-4 py-2 w-full bg-gray-900"
+          type="text"
+        />
+        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+          <ArrowRightIcon className="w-5 h-5" />
+        </div>
       </div>
     </div>
   );
