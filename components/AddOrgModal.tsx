@@ -6,24 +6,19 @@ export default function AddUserModal() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [profilePic, setProfilePic] = useState({ selectedFile: null });
+  const [profilePic, setProfilePic] = useState(null);
 
   const handleSubmit = async () => {
     console.log("submit working");
 
-    //  const formData = new FormData();
+     const formData = new FormData();
 
-    //   // Update the formData object
-    //   formData.append(
-    //     "myFile",
-    //     profilePic.selectedFile,
-    //     profilePic.selectedFile.name
-    //   );
+      // Update the formData object
+      formData.append("profilePic",profilePic);
+      formData.append("name",name);
+      formData.append("description",description);
 
-    const data = await axios_api.post("org/create", {
-      name,
-      description,
-    });
+    const data = await axios_api.post("org/create", formData);
 
     console.log(data);
 
@@ -76,14 +71,14 @@ export default function AddUserModal() {
                     onChange={(e) => setDescription(e.target.value)}
                     className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
                   />
-                  {/* <p className="mb-3">Add Image</p>
+                  <p className="mb-3">Add Image</p>
                   <input
                     type="file"
                     onChange={(e) =>
-                      setProfilePic({ selectedFile: e.target.files[0] })
+                      setProfilePic(e.target.files[0])
                     }
-                    value={profilePic}
-                  /> */}
+                    // value={profilePic}
+                  />
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
