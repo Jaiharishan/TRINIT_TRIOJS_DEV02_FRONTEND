@@ -11,7 +11,7 @@ const User = ({ user }: any) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await axios_("users/");
+  const res = await axios_.get("users/");
   const usersName = res.data.usersName;
 
   const paths = usersName.map((userName: String): Object => {

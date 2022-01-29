@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-export default function AddUserModal() {
+export default function AssignUserModal({ bugId }: any) {
   const [showModal, setShowModal] = useState(false);
 
-  const [memberId, setMemberId] = useState("");
-  const [rank, setRank] = useState("");
+  const [memberId, setMemeberId] = useState("");
 
   const handleSubmit = async () => {
-    console.log("submit working");
-    const res = await axios_api.put("org/addMember", {
-      memberId,
-      rank,
-    });
+    const res = await axios_api.post(`bug/assign/member/${bugId}/${memberId}/`);
+    console.log(res);
     // using axios i will send the data
     setShowModal(false);
   };
@@ -24,7 +20,7 @@ export default function AddUserModal() {
         onClick={() => setShowModal(true)}
       >
         <PlusIcon className="w-6 h-6" />
-        Add member
+        Assign Member
       </button>
       {showModal ? (
         <>
@@ -34,7 +30,7 @@ export default function AddUserModal() {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Add Member</h3>
+                  <h3 className="text-3xl font-semibold">Assign Member</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -50,14 +46,7 @@ export default function AddUserModal() {
                   <input
                     type="text"
                     value={memberId}
-                    onChange={(e) => setMemberId(e.target.value)}
-                    className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
-                  />
-                  <p className="mb-3">Rank</p>
-                  <input
-                    type="text"
-                    value={rank}
-                    onChange={(e) => setRank(e.target.value)}
+                    onChange={(e) => setMemeberId(e.target.value)}
                     className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
                   />
                 </div>
@@ -75,7 +64,7 @@ export default function AddUserModal() {
                     type="button"
                     onClick={() => handleSubmit()}
                   >
-                    Add
+                    Assign
                   </button>
                 </div>
               </div>

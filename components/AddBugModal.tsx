@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
-export default function AddBugModal() {
+import axios_api from "../axios/api";
+export default function AddBugModal({ orgId }: any) {
   const [showModal, setShowModal] = useState(false);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("submit working");
+    const res = await axios_api.post(`bug/create/${orgId}`, {
+      title,
+      description,
+      severity,
+    });
+
+    console.log(res);
 
     // using axios i will send the data
     setShowModal(false);
@@ -17,7 +25,7 @@ export default function AddBugModal() {
   return (
     <>
       <button
-        className="border text-white border-gray-600 px-5 py-2 rounded-md flex items-center gap-2"
+        className="border text-white border-gray-600 px-5 py-2 rounded-md flex items-center gap-2 hover-style"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -85,7 +93,7 @@ export default function AddBugModal() {
                     type="button"
                     onClick={() => handleSubmit()}
                   >
-                    Save Changes
+                    Add
                   </button>
                 </div>
               </div>

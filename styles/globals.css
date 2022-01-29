@@ -6,4 +6,7 @@
   .h {
     height: 100%;
   }
+  .hover-style {
+    @apply transition hover:border-gray-400 duration-200;
+  }
 }
