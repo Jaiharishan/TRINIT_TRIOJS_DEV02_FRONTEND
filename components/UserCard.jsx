@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserCard = ({ Name, profilePic }) => {
+const UserCard = ({ Name, profilePic,id }) => {
   return (
     <div className="rounded-lg mt-6 w-40 h-40 border-2 border-gray-600 flex flex-col items-center justify-center hover-style cursor-pointer">
       {profilePic ? (
@@ -14,6 +14,7 @@ const UserCard = ({ Name, profilePic }) => {
       )}
 
       <div className="text-white mt-5 text-xl">{Name}</div>
+      <div className="text-white mt-1 text-xs">{id}</div>
     </div>
   );
 };

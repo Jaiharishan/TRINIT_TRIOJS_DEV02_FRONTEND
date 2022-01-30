@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-export default function AddUserModal() {
+import {useRouter} from "next/router";
+export default function AddUserModal({orgId}:any) {
+  const router = useRouter()
   const [showModal, setShowModal] = useState(false);
 
   const [memberId, setMemberId] = useState("");
@@ -9,10 +11,13 @@ export default function AddUserModal() {
 
   const handleSubmit = async () => {
     console.log("submit working");
-    const res = await axios_api.put("org/addMember", {
+    const res = await axios_api.put(`org/addMember/${orgId}`, {
       memberId,
       rank,
     });
+    if(res.status==200){
+      router.push(`organizations/${orgId}`)
+    }
     // using axios i will send the data
     setShowModal(false);
   };
@@ -73,7 +78,7 @@ export default function AddUserModal() {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => handleSubmit()}
+                    onClick={handleSubmit}
                   >
                     Add
                   </button>

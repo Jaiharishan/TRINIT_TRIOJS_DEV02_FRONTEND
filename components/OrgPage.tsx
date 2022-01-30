@@ -27,7 +27,7 @@ const OrgPage = ({ org }: any) => {
 
         <div className="text-white text-lg mb-10">{org?.description}</div>
         <div className="flex items-center gap-4">
-          <AddUserModal />
+          <AddUserModal orgId={org?._id}/>
 
           <AddBugModal orgId={org?._id} />
         </div>
@@ -37,7 +37,7 @@ const OrgPage = ({ org }: any) => {
 
         <div className="flex gap-4 w-full flex-wrap">
           {org.rank1.map((member: any) => (
-            <UserCard Name={member?.userName}profilePic={member?.profilePic} />
+            <UserCard Name={member?.userName}profilePic={member?.profilePic}id={member?._id} />
           ))}
           {org.rank2.map((member: any) => (
             <UserCard Name={member?.userName}profilePic={member?.profilePic} />

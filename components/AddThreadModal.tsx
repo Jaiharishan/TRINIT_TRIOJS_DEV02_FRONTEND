@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-
-export default function AssignUserModal({ commentId }: any) {
+import {useRouter} from 'next/router'
+export default function AssignUserModal({ commentId,bugId }: any) {
+  const router = useRouter()
   const [showModal, setShowModal] = useState(false);
 
   const [description, setDescription] = useState("");
@@ -10,6 +11,9 @@ export default function AssignUserModal({ commentId }: any) {
   const handleSubmit = async () => {
     const res = await axios_api.post(`comment/add/comment/${commentId}`,{description});
     console.log(res);
+    if(res.status==200){
+      router.push(`/bugs/${bugId}`)
+    }
     // using axios i will send the data
     setShowModal(false);
   };

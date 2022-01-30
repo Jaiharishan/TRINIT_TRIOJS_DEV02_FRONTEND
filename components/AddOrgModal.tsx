@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
+import {useRouter} from 'next/router'
 export default function AddUserModal() {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const [name, setName] = useState("");
@@ -19,8 +21,11 @@ export default function AddUserModal() {
     formData.append("description", description);
 
     const data = await axios_api.post("org/create", formData);
-
+    if(data.status==200){
+      router.push('/')
+    }
     console.log(data);
+    
 
     // using axios i will send the data
     setShowModal(false);

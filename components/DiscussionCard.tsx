@@ -1,6 +1,6 @@
 import React from "react";
 import { AddThreadModal } from ".";
-const DiscussionCard = ({elem}) => {
+const DiscussionCard = ({elem,bugId}:any) => {
   return (
     <>
     <div className='flex align-center'>
@@ -17,7 +17,7 @@ const DiscussionCard = ({elem}) => {
         </div>
   
         <div className=" m-5">
-          <AddThreadModal commentId={elem._id} />
+          <AddThreadModal commentId={elem._id} bugId={bugId} />
         </div>
       </div>
       <div>

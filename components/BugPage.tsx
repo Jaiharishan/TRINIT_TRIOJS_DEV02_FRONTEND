@@ -67,7 +67,7 @@ const BugPage = ({ bug }: any) => {
 
       <div className=" flex-wrap gap-6 mb-10">
         {bug?.comment?.map((elem) => (
-          <DiscussionCard elem={elem}/>
+          <DiscussionCard elem={elem} bugId={bug._id}/>
         ))}
       </div>
 

@@ -31,13 +31,15 @@ const profile = () => {
     <>
       <Navbar />
       <div className="bg-gray-900 mt-20 py-10 min-h-full">
-        <div className="rounded-lg w-48 h-48 bg-blue-600 mb-4 mx-2"></div>
+        <div className="rounded-lg w-48 h-48 bg-blue-600 mb-4 mx-2">
+          <img src={`http://localhost:4000${user?.profilePic}`} className="w-48 h-48 rounded-lg object-cover"alt="" />
+        </div>
 
         <div className="py-4 mb-10 text-white border-b border-gray-600">
           <p className="text-3xl px-2">{user?.userName}</p>
         </div>
 
-        <div className="text-white text-lg mb-10 px-2"></div>
+        <div className="text-white text-lg mb-10 px-2">{user?.description}</div>
 
         <div className="px-2">
           <EditUserModal />
