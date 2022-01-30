@@ -26,7 +26,7 @@ export const getStaticProps = async (context: any) => {
   const _id = context.params._id;
   const res = await axios_.get(`view/orgs/${_id}`);
   const org = res.data.data;
-
+  console.log(org)
   return {
     props: { org: org },
   };

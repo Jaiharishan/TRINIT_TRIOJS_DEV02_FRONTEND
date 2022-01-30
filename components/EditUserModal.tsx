@@ -5,12 +5,14 @@ export default function AssignUserModal() {
   const [showModal, setShowModal] = useState(false);
 
   const [description, setDescription] = useState("");
-
+  const [profilePic, setProfilePic] = useState(null);
   const handleSubmit = async () => {
     console.log("submit working");
-    const result = await axios_api.put("/user/edit", {
-      description,
-    });
+    const formData = new FormData();
+
+      formData.append("profilePic",profilePic);
+      formData.append("description",description);
+    const result = await axios_api.put("/user/edit",formData);
     console.log(result);
 
     // using axios i will send the data
@@ -53,7 +55,13 @@ export default function AssignUserModal() {
                     onChange={(e) => setDescription(e.target.value)}
                     className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
                   />
+                  
                 </div>
+                <div className="relative p-6 flex-auto">
+                <p className="mb-3">Profile pic</p>
+                  <input type="file" onChange={e=>setProfilePic(e.target.files[0])} />
+                </div>
+                
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button

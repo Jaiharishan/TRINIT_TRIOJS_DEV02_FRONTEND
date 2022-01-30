@@ -33,7 +33,7 @@ const BugPage = ({ bug }: any) => {
       </div>
 
       <div className="text-white flex gap-2 text-lg mb-5">
-        Assigned to <p className="font-bold">Jaiharishan</p>
+        Assigned to {(bug.assignedTo).map(member=>(<p className="font-bold border rounded px-1">{member.userName}</p>))}
       </div>
 
       <div className="text-white text-lg mb-10">{bug?.description}</div>

@@ -7,7 +7,7 @@ const BugCard = ({ BugName, CreatedBy, Tags }: any) => {
 
       <div className="flex gap-2 items-center mt-6">
         <div className="w-5 h-5 rounded-full bg-blue-600"></div>
-        <div className="text-md text-white">{CreatedBy}</div>
+        <div className="text-md text-white">{CreatedBy.userName}</div>
       </div>
 
       <div className="flex gap-2 items-center mt-6">

@@ -7,7 +7,7 @@ import Link from "next/link";
 const OrgPage = ({ org }: any) => {
   //   const array = [1, 1, 1, 1, 1];
   const bugs = org.bugs;
-
+  console.log(bugs);
   return (
     <>
       <div className="bg-gray-900 px-2 mt-20 py-10">
@@ -32,15 +32,15 @@ const OrgPage = ({ org }: any) => {
           <AddBugModal orgId={org?._id} />
         </div>
         <p className="mt-16 text-3xl text-white px-2">Head</p>
-        <UserCard Name={org?.head?.userName} />
+        <UserCard Name={org?.head?.userName}profilePic={org?.head?.profilePic} />
         <p className="mt-16 text-3xl text-white px-2">Members</p>
 
         <div className="flex gap-4 w-full flex-wrap">
           {org.rank1.map((member: any) => (
-            <UserCard Name={member?.userName} />
+            <UserCard Name={member?.userName}profilePic={member?.profilePic} />
           ))}
           {org.rank2.map((member: any) => (
-            <UserCard Name={member?.userName} />
+            <UserCard Name={member?.userName}profilePic={member?.profilePic} />
           ))}
         </div>
 
@@ -53,7 +53,7 @@ const OrgPage = ({ org }: any) => {
                   <a>
                     <BugCard
                       BugName={bug?.title}
-                      CreatedBy="Jaihrishan"
+                      CreatedBy={bug?.createdBy}
                       Tags={bug?.severity}
                     />
                   </a>
@@ -68,11 +68,11 @@ const OrgPage = ({ org }: any) => {
           {bugs.map((bug: any) => {
             if (bug.status === "closed") {
               return (
-                <Link href="/Bug">
+                <Link href={`/bugs/${bug._id}`}>
                   <a>
                     <BugCard
                       BugName={bug?.title}
-                      CreatedBy="Jaihrishan"
+                      CreatedBy={bug?.createdBy}
                       Tags={bug?.severity}
                     />
                   </a>
