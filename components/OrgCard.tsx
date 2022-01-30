@@ -14,7 +14,7 @@ const OrgCard = ({ org }: any) => {
         </div>
 
         <div className="text-white text-2xl mt-4">{org?.name}</div>
-        <div className="text-white text-lg">{org?.head}</div>
+        <div className="text-white text-lg">{org?.head.userName}</div>
 
         <div className="text-gray-300 text-md">
           {org?.rank1.length + org?.rank2.length + 1} members

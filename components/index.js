@@ -12,3 +12,4 @@ export { default as ProfileDropDown } from "./ProfileDropDown";
 export { default as AssignUserModal } from "./AssignUserModal";
 export { default as EditUserModal } from "./EditUserModal";
 export { default as AddThreadModal } from "./AddThreadModal";
+export { default as CloseBugModal } from "./CloseBugModal";

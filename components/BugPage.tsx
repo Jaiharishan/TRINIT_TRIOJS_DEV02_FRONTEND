@@ -4,13 +4,15 @@ import Link from "next/link";
 import axios_api from "../axios/api";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
+import { CloseBugModal } from ".";
 const BugPage = ({ bug }: any) => {
   const router = useRouter();
   console.log(bug);
   const [description, setDescription] = useState("");
   const handleSubmit = async () => {
     const res = await axios_api.post(`bug/assign/request/${bug._id}/`);
-    console.log(res);
+
+    router.push(`/bugs/${bug._id}`);
   };
 
   const handleMessage = async () => {
@@ -26,13 +28,18 @@ const BugPage = ({ bug }: any) => {
 
   return (
     <div className="bg-gray-900 px-2 mt-20 py-10">
-      <div className="py-4 mb-5 text-white border-b border-gray-600">
-        <p className="text-3xl">
-          <Link href={`/organizations/${bug?.orgId?._id}`}>
-            <a className="hover:text-blue-500 hover-style">{bug.orgId.name}</a>
-          </Link>
-          / {bug?.title}
-        </p>
+      <div className="flex justify-between items-center">
+        <div className="py-4 mb-5 text-white border-b border-gray-600">
+          <p className="text-3xl">
+            <Link href={`/organizations/${bug?.orgId?._id}`}>
+              <a className="hover:text-blue-500 hover-style">
+                {bug.orgId.name}
+              </a>
+            </Link>
+            / {bug?.title}
+          </p>
+        </div>
+        <CloseBugModal bugId={bug._id} status={bug.status} />
       </div>
 
       <div className="flex items-center gap-4 mb-8">
@@ -46,18 +53,23 @@ const BugPage = ({ bug }: any) => {
 
       <div className="text-white flex gap-2 text-lg mb-5">
         Assigned to{" "}
-        {bug.assignedTo.map((member: any) => (
-          <p className="font-bold border rounded px-1">{member.userName}</p>
+        {bug?.assignedTo?.map((member: any) => (
+          <p className="font-bold border rounded px-2">{member.userName}</p>
         ))}
       </div>
-
+      <div className="text-white flex gap-2 text-lg mb-5">
+        Requested by{" "}
+        {bug?.assignRequests?.map((member: any) => (
+          <p className="font-bold border rounded px-2">{member.userName}</p>
+        ))}
+      </div>
       <div className="text-white text-lg mb-10">{bug?.description}</div>
 
       <div className="mb-10 flex gap-4">
         <AssignUserModal bugId={bug._id} />
         <div
           onClick={handleSubmit}
-          className="border text-white border-gray-600 px-5 py-2 rounded-md flex items-center gap-2 hover-style"
+          className="border text-white border-gray-600 px-5 py-2 rounded-md flex items-center gap-2 hover-style cursor-pointer"
         >
           Assign me
         </div>
@@ -67,7 +79,7 @@ const BugPage = ({ bug }: any) => {
 
       <div className=" flex-wrap gap-6 mb-10">
         {bug?.comment?.map((elem: any) => (
-          <DiscussionCard elem={elem} />
+          <DiscussionCard elem={elem} bugId={bug._id} />
         ))}
       </div>
 

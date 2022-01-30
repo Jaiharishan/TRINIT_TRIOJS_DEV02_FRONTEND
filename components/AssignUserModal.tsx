@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
+import {useRouter} from 'next/router'
 export default function AssignUserModal({ bugId }: any) {
   const [showModal, setShowModal] = useState(false);
-
+  const router = useRouter();
   const [memberId, setMemeberId] = useState("");
 
   const handleSubmit = async () => {
     const res = await axios_api.post(`bug/assign/member/${bugId}/${memberId}/`);
     console.log(res);
+    if(res.status==200){
+      router.push(`bugs/${bugId}`)
+    }
     // using axios i will send the data
     setShowModal(false);
   };

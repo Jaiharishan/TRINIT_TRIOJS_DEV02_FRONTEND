@@ -9,6 +9,7 @@ import axios_ from "../axios/axios";
 
 export default function Home() {
   // const [user, setUser]: [any, Function] = useRecoilState(userState);
+  
   const [user, setUser] = useState({});
   const array = [1, 1, 1, 1, 1];
   const [ownOrgs, setOwnOrgs] = useState([]);
@@ -30,6 +31,7 @@ export default function Home() {
         const result = await axios_.get(`user/orgList/${userId}`);
         setOwnOrgs(result.data.message.ownOrg);
         setEmployeeOrgs(result.data.message.employeeAt);
+
       }
     })();
   }, []);
@@ -37,7 +39,7 @@ export default function Home() {
   console.log(ownOrgs);
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <div className="w-full h bg-gray-900 mt-20 py-16 min-h-screen">
         <div className="px-4 flex items-center md:items-start flex-col">
           <p className="text-white text-3xl">Create Organization</p>

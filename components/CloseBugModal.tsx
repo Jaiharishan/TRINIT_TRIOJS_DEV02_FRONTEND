@@ -1,27 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-
-export default function CloseBugModal({ bugId }: any) {
+import { useRouter } from "next/router";
+export default function CloseBugModal({ bugId, status }: any) {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const [description, setDescription] = useState("");
 
   const handleSubmit = async () => {
-    const res = await axios_api.post(`bug/close/${bugId}/`);
+    const res = await axios_api.put(`bug/close/${bugId}/`);
     console.log(res);
+    if (res.status == 200) {
+      router.push(`/bugs/${bugId}`);
+    }
     // using axios i will send the data
     setShowModal(false);
   };
   return (
     <>
-      <button
-        className=" text-white px-4 bg-red-600 py-2 rounded-md flex items-center gap-2 hover-style"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Close Bug
-      </button>
+      {status == "closed" ? (
+        <button
+          disabled
+          className=" text-white px-4 bg-red-900 py-3 rounded-md flex items-center gap-2 hover-style"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Close Bug
+        </button>
+      ) : (
+        <button
+          className=" text-white px-4 bg-red-600 py-3 rounded-md flex items-center gap-2 hover-style"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Close Bug
+        </button>
+      )}
+
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">

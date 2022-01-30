@@ -1,6 +1,6 @@
 import React from "react";
 import { AddThreadModal } from ".";
-const DiscussionCard = ({ elem }: any) => {
+const DiscussionCard = ({ elem, bugId }: any) => {
   return (
     <>
       <div className="flex align-center">
@@ -8,6 +8,7 @@ const DiscussionCard = ({ elem }: any) => {
           <div className="px-2 py-4 border-b-2 border-gray-600 text-white text-lg flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-blue-600">
               <img
+                className="w-6 h-6 rounded-full object-cover"
                 src={`http://localhost:4000/${elem.openedBy.profilePic}`}
                 alt=""
               />
@@ -18,7 +19,7 @@ const DiscussionCard = ({ elem }: any) => {
         </div>
 
         <div className=" m-5">
-          <AddThreadModal commentId={elem._id} />
+          <AddThreadModal commentId={elem._id} bugId={bugId} />
         </div>
       </div>
       <div>
@@ -27,6 +28,7 @@ const DiscussionCard = ({ elem }: any) => {
             <div className="px-2 py-4 border-b-2 border-gray-600 text-white text-lg flex items-center gap-2">
               <div className="w-6 h-6 rounded-full bg-blue-600">
                 <img
+                  className="w-6 h-6 rounded-full object-cover"
                   src={`http://localhost:4000/${com.openedBy.profilePic}`}
                   alt=""
                 />
