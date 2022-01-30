@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { createPopper } from "@popperjs/core";
 import { LogoutIcon } from "@heroicons/react/solid";
 import Link from "next/link";
-const Dropdown = ({ color,user }: any) => {
+const Dropdown = ({ color, user }: any) => {
+  console.log(user);
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = React.createRef();
@@ -24,10 +25,10 @@ const Dropdown = ({ color,user }: any) => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full sm:w-6/12 md:w-4/12 px-4">
+        <div className="w-full px-4">
           <div className="relative inline-flex align-middle w-full">
             <button
-              className="rounded-full w-10 h-10 bg-blue-600"
+              className="rounded-full w-10 h-10"
               type="button"
               ref={btnDropdownRef}
               onClick={() => {
@@ -36,9 +37,15 @@ const Dropdown = ({ color,user }: any) => {
                   : openDropdownPopover();
               }}
             >
-              
-                {user?.profilePic?<img className=" w-10 h-10 rounded-full object-cover"src={`http://localhost:4000${user.profilePic}`} alt="" />:<div className="rounded-full w-10 h-10 bg-blue-600"></div>}
-              
+              {user.profilePic ? (
+                <img
+                  className=" w-10 h-10 rounded-full object-cover"
+                  src={`http://localhost:4000${user.profilePic}`}
+                  alt=""
+                />
+              ) : (
+                <div className="rounded-full w-10 h-10 bg-blue-600"></div>
+              )}
             </button>
             <div
               ref={popoverDropdownRef}
@@ -81,7 +88,7 @@ const Dropdown = ({ color,user }: any) => {
   );
 };
 
-export default function ProfileDropDown({user}) {
+export default function ProfileDropDown({ user }: any) {
   return (
     <>
       <Dropdown color="white" user={user} />

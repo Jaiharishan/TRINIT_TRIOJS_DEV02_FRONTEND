@@ -1,8 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios_ from "../../axios/axios";
 import { Navbar, BugPage } from "../../components";
+import axios_api from "../../axios/api";
 
 const Bug = ({ bug }: any) => {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const result = await axios_api.get("self/");
+
+      setUser(result.data.user);
+      console.log(result.data.user);
+    })();
+  }, []);
   console.log(bug);
   return (
     <>

@@ -1,10 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios_ from "../../axios/axios";
 import { Navbar, OrgPage } from "../../components";
+import { useState, useEffect } from "react";
+import axios_api from "../../axios/api";
+
 const Organization = ({ org }: any) => {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const result = await axios_api.get("self/");
+
+      setUser(result.data.user);
+      console.log(result.data.user);
+    })();
+  }, []);
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
       <OrgPage org={org} />
     </div>
   );
@@ -26,7 +39,7 @@ export const getStaticProps = async (context: any) => {
   const _id = context.params._id;
   const res = await axios_.get(`view/orgs/${_id}`);
   const org = res.data.data;
-  console.log(org)
+  console.log(org);
   return {
     props: { org: org },
   };

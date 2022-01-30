@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-import {useRouter} from "next/router";
-export default function AddUserModal({orgId}:any) {
-  const router = useRouter()
+import { useRouter } from "next/router";
+export default function AddUserModal({ orgId }: any) {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const [memberId, setMemberId] = useState("");
   const [rank, setRank] = useState("");
+  const [visibility, setVisibility] = useState("public");
 
   const handleSubmit = async () => {
     console.log("submit working");
@@ -15,8 +16,8 @@ export default function AddUserModal({orgId}:any) {
       memberId,
       rank,
     });
-    if(res.status==200){
-      router.push(`/${orgId}`)
+    if (res.status == 200) {
+      router.push(`/${orgId}`);
     }
     // using axios i will send the data
     setShowModal(false);
@@ -65,6 +66,26 @@ export default function AddUserModal({orgId}:any) {
                     onChange={(e) => setRank(e.target.value)}
                     className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
                   />
+                  <div className="flex gap-2 items-center mt-4">
+                    <p>Public</p>
+                    <input
+                      type="radio"
+                      name="visibility"
+                      value={visibility}
+                      onChange={(e) => setVisibility("public")}
+                      className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
+                    />
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <p>Private</p>
+                    <input
+                      type="radio"
+                      name="visibility"
+                      value={visibility}
+                      onChange={(e) => setVisibility("private")}
+                      className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
+                    />
+                  </div>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
