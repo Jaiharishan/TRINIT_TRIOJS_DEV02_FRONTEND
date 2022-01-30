@@ -6,22 +6,21 @@ import userState from "../atoms/userAtom";
 import axios_ from "../axios/axios";
 const profile = () => {
   const [user, setUser]: [any, Function] = useRecoilState(userState);
-  const array = [1, 1, 1, 1, 1];
-  const [orgs, setOrgs]: any = useState("");
+  const [orgs, setOrgs]: any = useState({});
 
   useEffect(() => {
     (async () => {
       const result = await axios_api.get("self/");
 
       setUser(result.data.user);
-    })();
-  }, []);
+  //   })();
+  // }, []);
 
-  useEffect(() => {
-    (async () => {
-      console.log(user);
+  // useEffect(() => {
+  //   (async () => {
+  //     console.log(user);
       const res = await axios_.get(
-        `user/orgList/${"61f5351163c2801e4133b4cd"}`
+        `user/orgList/${result.data.user._id}`
       );
       setOrgs(res.data.message);
     })();
@@ -48,10 +47,10 @@ const profile = () => {
 
         <div className="flex gap-4 flex-wrap justify-center md:justify-start">
           {orgs?.employeeAt?.map((elem: any) => {
-            return <OrgCard org={elem.orgId} />;
+            return <OrgCard org={elem} />;
           })}
           {orgs?.ownOrg?.map((elem: any) => {
-            return <OrgCard org={elem.orgId} />;
+            return <OrgCard org={elem} />;
           })}
         </div>
       </div>

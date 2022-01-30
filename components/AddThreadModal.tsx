@@ -8,7 +8,7 @@ export default function AssignUserModal({ commentId }: any) {
   const [description, setDescription] = useState("");
 
   const handleSubmit = async () => {
-    const res = await axios_api.post(`comment/add/comment/${commentId}`);
+    const res = await axios_api.post(`comment/add/comment/${commentId}`,{description});
     console.log(res);
     // using axios i will send the data
     setShowModal(false);
