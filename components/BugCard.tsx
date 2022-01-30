@@ -7,7 +7,12 @@ const BugCard = ({ BugName, CreatedBy, Tags }: any) => {
       <div className="text-xl text-white">{BugName}</div>
 
       <div className="flex gap-2 items-center mt-6">
-        <div className="w-5 h-5 rounded-full bg-blue-600"></div>
+        {CreatedBy?.profilePic ? (
+          <img src={`http://localhost:4000${CreatedBy.profilePic}`} alt="" />
+        ) : (
+          <div className="w-5 h-5 rounded-full bg-blue-600"></div>
+        )}
+
         <div className="text-md text-white">{CreatedBy?.userName}</div>
       </div>
 
