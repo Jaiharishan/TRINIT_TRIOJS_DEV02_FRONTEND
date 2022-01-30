@@ -1,8 +1,8 @@
 import React from "react";
 
-const UserCard = ({ Name, profilePic,id }) => {
+const UserCard = ({ Name, profilePic,id,rank }) => {
   return (
-    <div className="rounded-lg mt-6 w-40 h-40 border-2 border-gray-600 flex flex-col items-center justify-center hover-style cursor-pointer">
+    <div className="rounded-lg mt-6 w-44 h-44 border-2 border-gray-600 flex flex-col items-center justify-center hover-style cursor-pointer">
       {profilePic ? (
         <img
           src={`http://localhost:4000${profilePic}`}
@@ -14,7 +14,9 @@ const UserCard = ({ Name, profilePic,id }) => {
       )}
 
       <div className="text-white mt-5 text-xl">{Name}</div>
+      
       <div className="text-white mt-1 text-xs">{id}</div>
+      <p className="text-white mt-1 text-xs">{rank}</p>
     </div>
   );
 };
