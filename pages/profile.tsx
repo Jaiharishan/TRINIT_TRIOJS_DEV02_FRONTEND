@@ -14,14 +14,14 @@ const profile = () => {
       const result = await axios_api.get("self/");
 
       setUser(result.data.user);
-  //   })();
-  // }, []);
+    })();
+  }, []);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     console.log(user);
+  useEffect(() => {
+    (async () => {
+      console.log(user);
       const res = await axios_.get(
-        `user/orgList/${result.data.user._id}`
+        `user/orgList/${"61f5351163c2801e4133b4cd"}`
       );
       setOrgs(res.data.message);
     })();
@@ -32,15 +32,13 @@ const profile = () => {
     <>
       <Navbar />
       <div className="bg-gray-900 mt-20 py-10 min-h-full">
-        <div className="rounded-lg w-48 h-48 bg-blue-600 mb-4 mx-2">
-        <img src={`http://localhost:4000${user?.profilePic}`}></img>
-        </div>
+        <div className="rounded-lg w-48 h-48 bg-blue-600 mb-4 mx-2"></div>
 
         <div className="py-4 mb-10 text-white border-b border-gray-600">
           <p className="text-3xl px-2">{user?.userName}</p>
         </div>
 
-        <div className="text-white text-lg mb-10 px-2">{user?.description}</div>
+        <div className="text-white text-lg mb-10 px-2"></div>
 
         <div className="px-2">
           <EditUserModal />
@@ -50,10 +48,10 @@ const profile = () => {
 
         <div className="flex gap-4 flex-wrap justify-center md:justify-start">
           {orgs?.employeeAt?.map((elem: any) => {
-            return <OrgCard org={elem} />;
+            return <OrgCard org={elem.orgId} />;
           })}
           {orgs?.ownOrg?.map((elem: any) => {
-            return <OrgCard org={elem} />;
+            return <OrgCard org={elem.orgId} />;
           })}
         </div>
       </div>
