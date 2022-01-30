@@ -5,7 +5,7 @@ import axios_api from "../axios/api";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 
 const BugPage = ({ bug }: any) => {
-  const array = [1, 1, 1, 1, 1];
+
   console.log(bug);
   const handleSubmit = async () => {
     const res = await axios_api.post(`bug/assign/request/${bug._id}/`);
@@ -51,8 +51,8 @@ const BugPage = ({ bug }: any) => {
       <div className="text-3xl text-white mb-10">Discussions</div>
 
       <div className="flex flex-wrap gap-6 mb-10">
-        {array.map((elem) => (
-          <DiscussionCard />
+        {bug?.comment?.map((elem) => (
+          <DiscussionCard elem={elem}/>
         ))}
       </div>
 
