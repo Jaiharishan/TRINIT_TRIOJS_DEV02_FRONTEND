@@ -3,7 +3,7 @@ import { AssignUserModal, DiscussionCard } from ".";
 import Link from "next/link";
 import axios_api from "../axios/api";
 import { ArrowRightIcon } from "@heroicons/react/solid";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 const BugPage = ({ bug }: any) => {
   const router = useRouter();
   console.log(bug);
@@ -19,8 +19,8 @@ const BugPage = ({ bug }: any) => {
         description,
       });
       console.log(res);
-      setDescription("")
-      router.push(`/bugs/${bug._id}`)
+      setDescription("");
+      router.push(`/bugs/${bug._id}`);
     }
   };
 
@@ -66,8 +66,8 @@ const BugPage = ({ bug }: any) => {
       <div className="text-3xl text-white mb-10">Discussions</div>
 
       <div className=" flex-wrap gap-6 mb-10">
-        {bug?.comment?.map((elem) => (
-          <DiscussionCard elem={elem}/>
+        {bug?.comment?.map((elem: any) => (
+          <DiscussionCard elem={elem} />
         ))}
       </div>
 
