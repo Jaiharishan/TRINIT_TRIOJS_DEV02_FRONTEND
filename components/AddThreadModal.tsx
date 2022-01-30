@@ -1,38 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import axios_api from "../axios/api";
-export default function AddUserModal() {
+
+export default function AssignUserModal({ commentId }: any) {
   const [showModal, setShowModal] = useState(false);
 
-  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [profilePic, setProfilePic]: any = useState(null);
 
   const handleSubmit = async () => {
-    console.log("submit working");
-
-    const formData = new FormData();
-
-    // Update the formData object
-    formData.append("profilePic", profilePic);
-    formData.append("name", name);
-    formData.append("description", description);
-
-    const data = await axios_api.post("org/create", formData);
-
-    console.log(data);
-
+    const res = await axios_api.post(`comment/add/comment/${commentId}`);
+    console.log(res);
     // using axios i will send the data
     setShowModal(false);
   };
   return (
     <>
       <button
-        className="rounded-lg mt-6 w-48 h-48 border-2 border-gray-600 flex items-center justify-center hover:border-gray-400 transition duration-200"
+        className="border text-white border-gray-600 px-2 py-2 rounded-full flex items-center gap-2 hover-style"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        <PlusIcon className="text-white w-10 h-10" />
+        <PlusIcon className="w-6 h-6" />
       </button>
       {showModal ? (
         <>
@@ -42,9 +30,7 @@ export default function AddUserModal() {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    Create Organization
-                  </h3>
+                  <h3 className="text-3xl font-semibold">Add Thread</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
@@ -56,26 +42,12 @@ export default function AddUserModal() {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <p className="mb-3">Name</p>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
-                  />
-                  <p className="mb-3">Description</p>
+                  <p className="mb-3">Your Comment</p>
                   <input
                     type="text"
                     value={description}
-                    placeholder="Give a description"
                     onChange={(e) => setDescription(e.target.value)}
                     className="outline-none w-96 border border-gray-400 px-4 py-2 rounded-lg"
-                  />
-                  <p className="mb-3">Add Image</p>
-                  <input
-                    type="file"
-                    onChange={(e: any) => setProfilePic(e.target.files[0])}
-                    // value={profilePic}
                   />
                 </div>
                 {/*footer*/}
@@ -92,7 +64,7 @@ export default function AddUserModal() {
                     type="button"
                     onClick={() => handleSubmit()}
                   >
-                    Create
+                    Send
                   </button>
                 </div>
               </div>

@@ -11,3 +11,4 @@ export { default as DiscussionCard } from "./DiscussionCard";
 export { default as ProfileDropDown } from "./ProfileDropDown";
 export { default as AssignUserModal } from "./AssignUserModal";
 export { default as EditUserModal } from "./EditUserModal";
+export { default as AddThreadModal } from "./AddThreadModal";
