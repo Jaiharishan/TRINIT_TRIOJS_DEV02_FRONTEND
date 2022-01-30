@@ -17,7 +17,7 @@ const Bug = ({ bug }: any) => {
   console.log(bug);
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <BugPage bug={bug} />
     </>
   );

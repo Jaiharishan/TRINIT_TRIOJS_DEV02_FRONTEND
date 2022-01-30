@@ -16,7 +16,7 @@ const UserCard = ({ Name, profilePic, id, rank }: any) => {
       <div className="text-white mt-5 text-xl">{Name}</div>
 
       <div className="text-white mt-1 text-xs">{id}</div>
-      <p className="text-white mt-1 text-xs">{rank}</p>
+      <p className="text-white mt-1 text-sm font-bold">{rank}</p>
     </div>
   );
 };

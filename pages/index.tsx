@@ -9,7 +9,7 @@ import axios_ from "../axios/axios";
 
 export default function Home() {
   // const [user, setUser]: [any, Function] = useRecoilState(userState);
-  
+
   const [user, setUser] = useState({});
   const array = [1, 1, 1, 1, 1];
   const [ownOrgs, setOwnOrgs] = useState([]);
@@ -31,7 +31,6 @@ export default function Home() {
         const result = await axios_.get(`user/orgList/${userId}`);
         setOwnOrgs(result.data.message.ownOrg);
         setEmployeeOrgs(result.data.message.employeeAt);
-
       }
     })();
   }, []);
@@ -43,6 +42,10 @@ export default function Home() {
       <div className="w-full h bg-gray-900 mt-20 py-16 min-h-screen">
         <div className="px-4 flex items-center md:items-start flex-col">
           <p className="text-white text-3xl">Create Organization</p>
+          <p className="text-white mt-3 text-lg">
+            Create your own organiations in just one click.Give a name,
+            description and a image to create your org.
+          </p>
           <AddOrgModal />
         </div>
 
@@ -50,15 +53,22 @@ export default function Home() {
           <p className="text-white text-3xl">Owned organizations</p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            {ownOrgs.map((ownOrg: any) => {
-              return (
-                <Link href={`organizations/${ownOrg?._id}`}>
-                  <a>
-                    <OrgCard org={ownOrg} />
-                  </a>
-                </Link>
-              );
-            })}
+            {ownOrgs.length ? (
+              ownOrgs.map((ownOrg: any) => {
+                return (
+                  <Link href={`organizations/${ownOrg?._id}`}>
+                    <a>
+                      <OrgCard org={ownOrg} />
+                    </a>
+                  </Link>
+                );
+              })
+            ) : (
+              <p className="text-white mt-3 text-lg">
+                You don't own any organization. Create an organization by
+                clicking the create button above.
+              </p>
+            )}
           </div>
         </div>
       </div>

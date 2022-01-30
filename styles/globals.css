@@ -10,3 +10,22 @@
     @apply transition hover:border-gray-400 duration-200;
   }
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-gray-600;
+}
+
+/* Handle */
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 transition duration-200;
+}

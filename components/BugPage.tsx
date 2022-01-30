@@ -27,9 +27,9 @@ const BugPage = ({ bug }: any) => {
   };
 
   return (
-    <div className="bg-gray-900 px-2 mt-20 py-10">
-      <div className="flex justify-between items-center">
-        <div className="py-4 mb-5 text-white border-b border-gray-600">
+    <div className="bg-gray-900 px-2 mt-20 py-10 min-h-screen">
+      <div className="flex justify-between items-center border-b border-gray-600 px-2">
+        <div className="py-4 mb-5 text-white">
           <p className="text-3xl">
             <Link href={`/organizations/${bug?.orgId?._id}`}>
               <a className="hover:text-blue-500 hover-style">
@@ -42,23 +42,24 @@ const BugPage = ({ bug }: any) => {
         <CloseBugModal bugId={bug._id} status={bug.status} />
       </div>
 
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-4 mb-8 mt-5">
         <div className="rounded-xl px-4 py-1 border border-gray-600 text-white text-sm cursor-pointer">
           {bug.severity}
-        </div>
-        <div className="rounded-xl px-4 py-1 border border-gray-600 text-white text-sm cursor-pointer">
-          {bug.status}
         </div>
       </div>
 
       <div className="text-white flex gap-2 text-lg mb-5">
-        Assigned to{" "}
-        {bug?.assignedTo?.map((member: any) => (
-          <p className="font-bold border rounded px-2">{member.userName}</p>
-        ))}
+        Assigned to
+        {bug?.assignedTo ? (
+          bug?.assignedTo?.map((member: any) => (
+            <p className="font-bold border rounded px-2">{member.userName}</p>
+          ))
+        ) : (
+          <p className="text-white">Not assigned yet</p>
+        )}
       </div>
       <div className="text-white flex gap-2 text-lg mb-5">
-        Requested by{" "}
+        Requested by
         {bug?.assignRequests?.map((member: any) => (
           <p className="font-bold border rounded px-2">{member.userName}</p>
         ))}
